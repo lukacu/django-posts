@@ -1,0 +1,17 @@
+{% extends "posts/base.html" %}
+{% load markup %}
+{% load tagging_tags %}
+{% load attachments_tags %}
+{% block title %}{{post.title}}{% endblock %}
+{% block content %}
+<div class="posts post">
+<h1>{{post.title}}</h1>
+<div class="content">{{ post.text|markdown }}</div>
+<div class="resources">
+{% get_attachments_for post as "attachments" %}
+{% include "posts/attachments.html" %}
+{% tags_for_object post as tags %}
+{% include "posts/tags.html" %}
+</div>
+</div>
+{% endblock %}

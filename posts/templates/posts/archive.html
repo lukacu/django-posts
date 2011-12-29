@@ -1,0 +1,10 @@
+{% extends "posts/base.html" %}
+{% load markup %}
+{% block title %}Archive{% endblock %}
+{% block content %}
+<div class="posts archive years list">
+{% for year in years %}
+<a href="{% url posts-archive-year year=year.year %}"><div class="year"><div class="title">{{year.year}}</div><div class="count">{{year.entries}} entr{{ year.entries|pluralize:"y,ies" }}</div></div></a>
+{% endfor %}
+</div>
+{% endblock %}

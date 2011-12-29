@@ -1,0 +1,8 @@
+<div class="attachments">
+{% if attachments %}
+<h2>Attachments</h2>
+{% for attachment in attachments %}
+<a class="attachment" href="{{ attachment.attachment_file.url }}">{{ attachment.filename }}</a>
+{% endfor %}
+{% endif %}
+</div>

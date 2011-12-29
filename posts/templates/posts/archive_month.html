@@ -1,0 +1,21 @@
+{% extends "posts/base.html" %}
+{% load markup %}
+{% load posts_tags %}
+{% block title %}Archive for {{month}} {{year}}{% endblock %}
+{% block content %}
+<div class="posts archive month list">
+{% for post in posts %}
+<div class="post preview">
+<h3 class="title"><a href="{% url posts-post slug=post.title_slug %}">{{post.title}}</a></h3>
+<div class="date">Written on {{ post.date|date }} at {{ post.date|time }}</div>
+<div class="content">
+{% teaser 50 %}
+{{ post.text|markdown }}
+{% more %}
+<a href="{% url posts-post slug=post.title_slug %}">Read more</a>
+{% endteaser %}
+</div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "posts/base.html" %}
+{% load markup %}
+{% block title %}Archive for year {{year}}{% endblock %}
+{% block content %}
+<div class="posts archive months">
+{% for month in months %}
+{% if month.entries > 0 %}
+<a href="{% url posts-archive-month month=month.month year=year %}"><div class="month"><div class="title">{{month.name}}</div><div class="count">{{month.posts}} entr{{ month.posts|pluralize:"y,ies" }}</div></div></a>
+{% else %}
+<div class="month"><div class="title">{{month.name}}</div><div class="count">{{month.posts}} entr{{ month.entries|pluralize:"y,ies" }}</div></div>
+{% endif %}
+{% endfor %}
+</div>
+{% endblock %}
