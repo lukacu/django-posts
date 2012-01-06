@@ -12,7 +12,6 @@ from django.core.files.base import ContentFile
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.utils.encoding import smart_str, force_unicode
-from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _
 
 from tagging.fields import TagField

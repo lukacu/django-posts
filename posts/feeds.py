@@ -5,6 +5,7 @@ from django.contrib.markup.templatetags.markup import markdown
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from posts.models import Post
+from tagging.models import Tag
 
 class LatestPostsFeed(Feed):
     title = _("Recent posts")
@@ -14,11 +15,19 @@ class LatestPostsFeed(Feed):
       return reverse("posts-archive")
 
     def items(self):
-        return Post.objects.filter(is_public = True).order_by('-date')[:5]
+      return Post.objects.filter(is_public = True).order_by('-date')[:5]
 
     def item_title(self, item):
-        return item.title
+      return item.title
 
     def item_description(self, item):
-        return markdown(item.text)
+      return markdown(item.text)
 
+    def item_categories(self, item):
+      return [tag.name for tag in Tag.objects.get_for_object(item)]
+
+    def item_pubdate(self, item):
+      return item.date
+
+    def item_guid(self, item):
+      return "post_%d" % item.id
