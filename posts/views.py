@@ -39,7 +39,7 @@ def archive(request):
   elif DB_TYPE == "mysql":
     year = "YEAR(`posts_post`.`date`)"
 
-  yearsraw = list(Post.objects.filter(is_public=True).extra(select={"year" : year}).values('year').order_by().annotate(entries=Count('id')))
+  yearsraw = list(Post.objects.filter(is_public=True).extra(select={"year" : year}).values('year').order_by('year').annotate(entries=Count('id')))
 
   if DB_TYPE == "sqlite":
     years = [ {'entries' : o['entries'], 'year' : o['year'][:4]} for o in yearsraw ]
